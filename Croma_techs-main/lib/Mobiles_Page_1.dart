@@ -914,6 +914,348 @@
 
 
 
+// import 'package:flutter/material.dart';
+// import 'package:firebase_storage/firebase_storage.dart';
+// import 'package:flutter/services.dart';
+//
+// // Define a data model for wishlist items
+// class WishlistItem {
+//   final String imagePath;
+//   final String productName;
+//
+//   WishlistItem({required this.imagePath, required this.productName});
+// }
+//
+// class MobilesPage extends StatefulWidget {
+//   const MobilesPage({Key? key}) : super(key: key);
+//
+//   @override
+//   _MobilesPageState createState() => _MobilesPageState();
+// }
+//
+// class _MobilesPageState extends State<MobilesPage> {
+//   late List<bool> isLiked;
+//   final FirebaseStorage _storage = FirebaseStorage.instance;
+//   List<WishlistItem> wishlistItems = []; // List to store wishlist items
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//     isLiked = List.filled(1, false); // Initialize isLiked list with size 1
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text('Mobile Phones'),
+//       ),
+//       body: Column(
+//         children: [
+//           Padding(
+//             padding: const EdgeInsets.all(8.0),
+//             child: TextField(
+//               decoration: InputDecoration(
+//                 hintText: 'Search Mobiles',
+//                 prefixIcon: Icon(Icons.search),
+//                 border: OutlineInputBorder(),
+//               ),
+//             ),
+//           ),
+//           Expanded(
+//             child: FutureBuilder<String>(
+//               future: _fetchProductImage(), // Fetch product image
+//               builder: (context, snapshot) {
+//                 if (snapshot.connectionState == ConnectionState.waiting) {
+//                   return Center(child: CircularProgressIndicator());
+//                 } else if (snapshot.hasError) {
+//                   return Center(child: Text('Error: ${snapshot.error}'));
+//                 } else {
+//                   // If image is fetched successfully, display it
+//                   String imagePath = snapshot.data!;
+//                   return Card(
+//                     child: InkWell(
+//                       onTap: () {
+//                         // Navigate to a new detail page when the image is clicked
+//                         Navigator.of(context).push(MaterialPageRoute(
+//                           builder: (context) => MobileDetailsPage(imagePath: imagePath),
+//                         ));
+//                       },
+//                       child: Column(
+//                         children: [
+//                           Expanded(
+//                             child: Image.network(imagePath),
+//                           ),
+//                           ButtonBar(
+//                             alignment: MainAxisAlignment.center,
+//                             children: [
+//                               IconButton(
+//                                 icon: Icon(
+//                                   isLiked[0] ? Icons.favorite : Icons.favorite_border,
+//                                   color: isLiked[0] ? Colors.red : null,
+//                                 ),
+//                                 onPressed: () {
+//                                   // Toggle the like button state and add to wishlist
+//                                   setState(() {
+//                                     isLiked[0] = !isLiked[0];
+//                                     if (isLiked[0]) {
+//                                       addToWishlist(imagePath, 'Product Name'); // Add to wishlist
+//                                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+//                                         content: Text('Added to Wishlist!'),
+//                                       ));
+//                                     }
+//                                   });
+//                                 },
+//                               ),
+//                               IconButton(
+//                                 icon: Icon(Icons.shopping_cart),
+//                                 onPressed: () {
+//                                   // Handle add to cart button press
+//                                 },
+//                               ),
+//                             ],
+//                           ),
+//                         ],
+//                       ),
+//                     ),
+//                   );
+//                 }
+//               },
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+//
+//   // Method to fetch the product image from Firebase Storage
+//   Future<String> _fetchProductImage() async {
+//     try {
+//       // Get a reference to the image in Firebase Storage
+//       Reference reference = _storage.ref('iphone-15-finish-select-202309-6-1inch-blue.jpeg');
+//
+//       // Get the download URL for the image
+//       String downloadURL = await reference.getDownloadURL();
+//
+//       return downloadURL;
+//     } on FirebaseException catch (e) {
+//       print('Error fetching product image: $e');
+//       throw PlatformException(
+//         code: 'FETCH_ERROR',
+//         message: 'Failed to fetch product image. Please try again later.',
+//       );
+//     }
+//   }
+//
+//   // Method to add an item to the wishlist
+//   void addToWishlist(String imagePath, String productName) {
+//     setState(() {
+//       wishlistItems.add(WishlistItem(imagePath: imagePath, productName: productName));
+//     });
+//   }
+// }
+//
+// class MobileDetailsPage extends StatelessWidget {
+//   final String imagePath;
+//
+//   MobileDetailsPage({required this.imagePath});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text('Product Details'),
+//       ),
+//       body: Center(
+//         child: Image.network(imagePath),
+//       ),
+//     );
+//   }
+// }
+//
+// void main() {
+//   runApp(MaterialApp(
+//     home: MobilesPage(),
+//   ));
+// }
+
+
+
+//
+// import 'package:flutter/material.dart';
+// import 'package:firebase_storage/firebase_storage.dart';
+// import 'package:flutter/services.dart';
+//
+// // Define a data model for wishlist items
+// class WishlistItem {
+//   final String imagePath;
+//   final String productName;
+//
+//   WishlistItem({required this.imagePath, required this.productName});
+// }
+//
+// class MobilesPage extends StatefulWidget {
+//   const MobilesPage({Key? key}) : super(key: key);
+//
+//   @override
+//   _MobilesPageState createState() => _MobilesPageState();
+// }
+//
+// class _MobilesPageState extends State<MobilesPage> {
+//   late List<bool> isLiked;
+//   final FirebaseStorage _storage = FirebaseStorage.instance;
+//   List<WishlistItem> wishlistItems = []; // List to store wishlist items
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//     isLiked = List.filled(2, false); // Initialize isLiked list with size 2 for two products
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text('Mobile Phones'),
+//       ),
+//       body: Column(
+//         children: [
+//           Padding(
+//             padding: const EdgeInsets.all(8.0),
+//             child: TextField(
+//               decoration: InputDecoration(
+//                 hintText: 'Search Mobiles',
+//                 prefixIcon: Icon(Icons.search),
+//                 border: OutlineInputBorder(),
+//               ),
+//             ),
+//           ),
+//           Expanded(
+//             child: ListView.builder(
+//               itemCount: 2, // Display two products
+//               itemBuilder: (context, index) {
+//                 return FutureBuilder<String>(
+//                   future: _fetchProductImage(index), // Fetch product image
+//                   builder: (context, snapshot) {
+//                     if (snapshot.connectionState == ConnectionState.waiting) {
+//                       return Center(child: CircularProgressIndicator());
+//                     } else if (snapshot.hasError) {
+//                       return Center(child: Text('Error: ${snapshot.error}'));
+//                     } else {
+//                       // If image is fetched successfully, display it
+//                       String imagePath = snapshot.data!;
+//                       return Card(
+//                         child: InkWell(
+//                           onTap: () {
+//                             // Navigate to a new detail page when the image is clicked
+//                             Navigator.of(context).push(MaterialPageRoute(
+//                               builder: (context) => MobileDetailsPage(imagePath: imagePath),
+//                             ));
+//                           },
+//                           child: Column(
+//                             children: [
+//                               Image.network(imagePath),
+//                               ButtonBar(
+//                                 alignment: MainAxisAlignment.center,
+//                                 children: [
+//                                   IconButton(
+//                                     icon: Icon(
+//                                       isLiked[index] ? Icons.favorite : Icons.favorite_border,
+//                                       color: isLiked[index] ? Colors.red : null,
+//                                     ),
+//                                     onPressed: () {
+//                                       // Toggle the like button state and add to wishlist
+//                                       setState(() {
+//                                         isLiked[index] = !isLiked[index];
+//                                         if (isLiked[index]) {
+//                                           addToWishlist(imagePath, 'Product Name $index'); // Add to wishlist
+//                                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+//                                             content: Text('Added to Wishlist!'),
+//                                           ));
+//                                         }
+//                                       });
+//                                     },
+//                                   ),
+//                                   IconButton(
+//                                     icon: Icon(Icons.shopping_cart),
+//                                     onPressed: () {
+//                                       // Handle add to cart button press
+//                                     },
+//                                   ),
+//                                 ],
+//                               ),
+//                             ],
+//                           ),
+//                         ),
+//                       );
+//                     }
+//                   },
+//                 );
+//               },
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+//
+//   // Method to fetch the product image from Firebase Storage
+//   Future<String> _fetchProductImage(int index) async {
+//     try {
+//       // Define image paths for each product
+//       List<String> imagePaths = [
+//         'iphone-15-finish-select-202309-6-1inch-blue.jpeg',
+//         '',
+//       ];
+//
+//       // Get a reference to the image in Firebase Storage
+//       Reference reference = _storage.ref(imagePaths[index]);
+//
+//       // Get the download URL for the image
+//       String downloadURL = await reference.getDownloadURL();
+//
+//       return downloadURL;
+//     } on FirebaseException catch (e) {
+//       print('Error fetching product image: $e');
+//       throw PlatformException(
+//         code: 'FETCH_ERROR',
+//         message: 'Failed to fetch product image. Please try again later.',
+//       );
+//     }
+//   }
+//
+//   // Method to add an item to the wishlist
+//   void addToWishlist(String imagePath, String productName) {
+//     setState(() {
+//       wishlistItems.add(WishlistItem(imagePath: imagePath, productName: productName));
+//     });
+//   }
+// }
+//
+// class MobileDetailsPage extends StatelessWidget {
+//   final String imagePath;
+//
+//   MobileDetailsPage({required this.imagePath});
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text('Product Details'),
+//       ),
+//       body: Center(
+//         child: Image.network(imagePath),
+//       ),
+//     );
+//   }
+// }
+//
+// void main() {
+//   runApp(MaterialApp(
+//     home: MobilesPage(),
+//   ));
+// }
+
 import 'package:flutter/material.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
@@ -941,7 +1283,7 @@ class _MobilesPageState extends State<MobilesPage> {
   @override
   void initState() {
     super.initState();
-    isLiked = List.filled(1, false); // Initialize isLiked list with size 1
+    isLiked = List.filled(2, false); // Initialize isLiked list with size 2 for two products
   }
 
   @override
@@ -963,63 +1305,66 @@ class _MobilesPageState extends State<MobilesPage> {
             ),
           ),
           Expanded(
-            child: FutureBuilder<String>(
-              future: _fetchProductImage(), // Fetch product image
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
-                } else {
-                  // If image is fetched successfully, display it
-                  String imagePath = snapshot.data!;
-                  return Card(
-                    child: InkWell(
-                      onTap: () {
-                        // Navigate to a new detail page when the image is clicked
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => MobileDetailsPage(imagePath: imagePath),
-                        ));
-                      },
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: Image.network(imagePath),
-                          ),
-                          ButtonBar(
-                            alignment: MainAxisAlignment.center,
+            child: ListView.builder(
+              itemCount: 2, // Display two products
+              itemBuilder: (context, index) {
+                return FutureBuilder<String>(
+                  future: _fetchProductImage(index), // Fetch product image
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(child: CircularProgressIndicator());
+                    } else if (snapshot.hasError) {
+                      return Center(child: Text('Error: ${snapshot.error}'));
+                    } else {
+                      // If image is fetched successfully, display it
+                      String imagePath = snapshot.data!;
+                      return Card(
+                        child: InkWell(
+                          onTap: () {
+                            // Navigate to a new detail page when the image is clicked
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => MobileDetailsPage(imagePath: imagePath),
+                            ));
+                          },
+                          child: Column(
                             children: [
-                              IconButton(
-                                icon: Icon(
-                                  isLiked[0] ? Icons.favorite : Icons.favorite_border,
-                                  color: isLiked[0] ? Colors.red : null,
-                                ),
-                                onPressed: () {
-                                  // Toggle the like button state and add to wishlist
-                                  setState(() {
-                                    isLiked[0] = !isLiked[0];
-                                    if (isLiked[0]) {
-                                      addToWishlist(imagePath, 'Product Name'); // Add to wishlist
-                                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                        content: Text('Added to Wishlist!'),
-                                      ));
-                                    }
-                                  });
-                                },
-                              ),
-                              IconButton(
-                                icon: Icon(Icons.shopping_cart),
-                                onPressed: () {
-                                  // Handle add to cart button press
-                                },
+                              Image.network(imagePath),
+                              ButtonBar(
+                                alignment: MainAxisAlignment.center,
+                                children: [
+                                  IconButton(
+                                    icon: Icon(
+                                      isLiked[index] ? Icons.favorite : Icons.favorite_border,
+                                      color: isLiked[index] ? Colors.red : null,
+                                    ),
+                                    onPressed: () {
+                                      // Toggle the like button state and add to wishlist
+                                      setState(() {
+                                        isLiked[index] = !isLiked[index];
+                                        if (isLiked[index]) {
+                                          addToWishlist(imagePath, 'Product Name $index'); // Add to wishlist
+                                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                            content: Text('Added to Wishlist!'),
+                                          ));
+                                        }
+                                      });
+                                    },
+                                  ),
+                                  IconButton(
+                                    icon: Icon(Icons.shopping_cart),
+                                    onPressed: () {
+                                      // Handle add to cart button press
+                                    },
+                                  ),
+                                ],
                               ),
                             ],
                           ),
-                        ],
-                      ),
-                    ),
-                  );
-                }
+                        ),
+                      );
+                    }
+                  },
+                );
               },
             ),
           ),
@@ -1029,10 +1374,16 @@ class _MobilesPageState extends State<MobilesPage> {
   }
 
   // Method to fetch the product image from Firebase Storage
-  Future<String> _fetchProductImage() async {
+  Future<String> _fetchProductImage(int index) async {
     try {
+      // Define image paths for each product
+      List<String> imagePaths = [
+        'iphone-15-finish-select-202309-6-1inch-blue.jpeg',
+        'mobile1.webp',
+      ];
+
       // Get a reference to the image in Firebase Storage
-      Reference reference = _storage.ref('iphone-15-finish-select-202309-6-1inch-blue.jpeg');
+      Reference reference = _storage.ref(imagePaths[index]);
 
       // Get the download URL for the image
       String downloadURL = await reference.getDownloadURL();

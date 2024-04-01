@@ -261,6 +261,547 @@
 
 
 
+// import 'package:flutter/material.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+// import 'wishlist_page.dart'; // Import the WishlistPage
+// import 'edit_profile_page.dart'; // Import the EditProfilePage
+//
+// class UserProfilePage extends StatefulWidget {
+//   @override
+//   _UserProfilePageState createState() => _UserProfilePageState();
+// }
+//
+// class _UserProfilePageState extends State<UserProfilePage> {
+//   User? _user; // User object to store current user
+//   late String _username; // Variable to store the username
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//     _getUserInfo(); // Fetch user information when the widget initializes
+//   }
+//
+//   // Method to fetch user information
+//   void _getUserInfo() {
+//     User? user = FirebaseAuth.instance.currentUser;
+//     if (user != null) {
+//       setState(() {
+//         _user = user;
+//         _username = user.displayName ?? ''; // Get the username from user's display name
+//       });
+//     }
+//   }
+//
+//   // Method to update the username
+//   void _updateUsername(String newUsername) {
+//     setState(() {
+//       _username = newUsername;
+//     });
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('User Profile'),
+//       ),
+//       body: Stack(
+//         children: [
+//           Image.asset(
+//             'assets/wave.png', // Adjust path according to your image location
+//             fit: BoxFit.cover,
+//             width: double.infinity,
+//             height: double.infinity,
+//           ),
+//           Center(
+//             child: _user != null
+//                 ? Column(
+//               mainAxisAlignment: MainAxisAlignment.center,
+//               children: [
+//                 Container(
+//                   width: 120,
+//                   height: 120,
+//                   decoration: BoxDecoration(
+//                     shape: BoxShape.circle,
+//                     image: DecorationImage(
+//                       image: AssetImage('assets/croma_final.jpg'), // Placeholder profile image
+//                       fit: BoxFit.cover,
+//                     ),
+//                   ),
+//                 ),
+//                 SizedBox(height: 16),
+//                 Text(
+//                   _username,
+//                   style: TextStyle(
+//                     fontSize: 24,
+//                     fontWeight: FontWeight.bold,
+//                     color: Colors.white, // Text color set to white
+//                   ),
+//                 ),
+//                 SizedBox(height: 16),
+//                 Text(
+//                   'Email: ${_user!.email}',
+//                   style: TextStyle(
+//                     fontSize: 18,
+//                     color: Colors.white, // Text color set to white
+//                   ),
+//                 ),
+//                 SizedBox(height: 8),
+//                 Text(
+//                   'UID: ${_user!.uid}',
+//                   style: TextStyle(
+//                     fontSize: 18,
+//                     color: Colors.white, // Text color set to white
+//                   ),
+//                 ),
+//                 SizedBox(height: 16),
+//                 ElevatedButton(
+//                   onPressed: () {
+//                     Navigator.push(
+//                       context,
+//                       MaterialPageRoute(builder: (context) => WishlistPage(wishlistItems: [],)), // Navigate to WishlistPage
+//                     );
+//                   },
+//                   child: Text('My Wishlist'),
+//                 ),
+//                 SizedBox(height: 16),
+//                 ElevatedButton(
+//                   onPressed: () {
+//                     Navigator.push(
+//                       context,
+//                       MaterialPageRoute(
+//                         builder: (context) => EditProfilePage(username: _username, onUpdate: _updateUsername),
+//                       ),
+//                     );
+//                   },
+//                   child: Text('Edit Profile'),
+//                 ),
+//               ],
+//             )
+//                 : CircularProgressIndicator(), // Show loading indicator while user info is being fetched
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+
+
+// import 'package:flutter/material.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+// import 'wishlist_page.dart'; // Import the WishlistPage
+// import 'edit_profile_page.dart'; // Import the EditProfilePage
+//
+// class UserProfilePage extends StatefulWidget {
+//   @override
+//   _UserProfilePageState createState() => _UserProfilePageState();
+// }
+//
+// class _UserProfilePageState extends State<UserProfilePage> {
+//   User? _user; // User object to store current user
+//   late String _username; // Variable to store the username
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//     _getUserInfo(); // Fetch user information when the widget initializes
+//   }
+//
+//   // Method to fetch user information
+//   void _getUserInfo() {
+//     User? user = FirebaseAuth.instance.currentUser;
+//     if (user != null) {
+//       setState(() {
+//         _user = user;
+//         _username = user.displayName ?? ''; // Get the username from user's display name
+//       });
+//     }
+//   }
+//
+//   // Method to update the username
+//   void _updateUsername(String newUsername) {
+//     setState(() {
+//       _username = newUsername;
+//     });
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('User Profile'),
+//         actions: [
+//           IconButton(
+//             icon: Icon(Icons.edit),
+//             onPressed: () {
+//               Navigator.push(
+//                 context,
+//                 MaterialPageRoute(
+//                   builder: (context) => EditProfilePage(
+//                     username: _username,
+//                     onUpdate: _updateUsername,
+//                   ),
+//                 ),
+//               );
+//             },
+//           ),
+//         ],
+//       ),
+//       body: Stack(
+//         children: [
+//           Image.asset(
+//             'assets/wave.png', // Adjust path according to your image location
+//             fit: BoxFit.cover,
+//             width: double.infinity,
+//             height: double.infinity,
+//           ),
+//           Center(
+//             child: _user != null
+//                 ? Column(
+//               mainAxisAlignment: MainAxisAlignment.center,
+//               children: [
+//                 Container(
+//                   width: 120,
+//                   height: 120,
+//                   decoration: BoxDecoration(
+//                     shape: BoxShape.circle,
+//                     image: DecorationImage(
+//                       image: AssetImage('assets/croma_final.jpg'), // Placeholder profile image
+//                       fit: BoxFit.cover,
+//                     ),
+//                   ),
+//                 ),
+//                 SizedBox(height: 16),
+//                 Text(
+//                   _username,
+//                   style: TextStyle(
+//                     fontSize: 24,
+//                     fontWeight: FontWeight.bold,
+//                     color: Colors.white, // Text color set to white
+//                   ),
+//                 ),
+//                 SizedBox(height: 16),
+//                 Text(
+//                   'Email: ${_user!.email}',
+//                   style: TextStyle(
+//                     fontSize: 18,
+//                     color: Colors.white, // Text color set to white
+//                   ),
+//                 ),
+//                 SizedBox(height: 8),
+//                 Text(
+//                   'UID: ${_user!.uid}',
+//                   style: TextStyle(
+//                     fontSize: 18,
+//                     color: Colors.white, // Text color set to white
+//                   ),
+//                 ),
+//                 SizedBox(height: 16),
+//                 ElevatedButton(
+//                   onPressed: () {
+//                     Navigator.push(
+//                       context,
+//                       MaterialPageRoute(
+//                         builder: (context) => WishlistPage(wishlistItems: []),
+//                       ),
+//                     ); // Navigate to WishlistPage
+//                   },
+//                   child: Text('My Wishlist'),
+//                 ),
+//               ],
+//             )
+//                 : CircularProgressIndicator(), // Show loading indicator while user info is being fetched
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+// import 'package:flutter/material.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+// import 'wishlist_page.dart'; // Import the WishlistPage
+// import 'edit_profile_page.dart'; // Import the EditProfilePage
+//
+// class UserProfilePage extends StatefulWidget {
+//   @override
+//   _UserProfilePageState createState() => _UserProfilePageState();
+// }
+//
+// class _UserProfilePageState extends State<UserProfilePage> {
+//   User? _user; // User object to store current user
+//   late String _username; // Variable to store the username
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//     _getUserInfo(); // Fetch user information when the widget initializes
+//   }
+//
+//   // Method to fetch user information
+//   void _getUserInfo() {
+//     User? user = FirebaseAuth.instance.currentUser;
+//     if (user != null) {
+//       setState(() {
+//         _user = user;
+//         _username = user.displayName ?? ''; // Get the username from user's display name
+//       });
+//     }
+//   }
+//
+//   // Method to update the username
+//   void _updateUsername(String newUsername) {
+//     setState(() {
+//       _username = newUsername;
+//     });
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('User Profile'),
+//       ),
+//       body: Stack(
+//         children: [
+//           Image.asset(
+//             'assets/wave.png', // Adjust path according to your image location
+//             fit: BoxFit.cover,
+//             width: double.infinity,
+//             height: double.infinity,
+//           ),
+//           Center(
+//             child: _user != null
+//                 ? Column(
+//               mainAxisAlignment: MainAxisAlignment.center,
+//               children: [
+//                 Container(
+//                   width: 120,
+//                   height: 120,
+//                   decoration: BoxDecoration(
+//                     shape: BoxShape.circle,
+//                     image: DecorationImage(
+//                       image: AssetImage('assets/croma_final.jpg'), // Placeholder profile image
+//                       fit: BoxFit.cover,
+//                     ),
+//                   ),
+//                 ),
+//                 SizedBox(height: 16),
+//                 Text(
+//                   _username,
+//                   style: TextStyle(
+//                     fontSize: 24,
+//                     fontWeight: FontWeight.bold,
+//                     color: Colors.white, // Text color set to white
+//                   ),
+//                 ),
+//                 SizedBox(height: 16),
+//                 Text(
+//                   'Email: ${_user!.email}',
+//                   style: TextStyle(
+//                     fontSize: 18,
+//                     color: Colors.white, // Text color set to white
+//                   ),
+//                 ),
+//                 SizedBox(height: 8),
+//                 Text(
+//                   'UID: ${_user!.uid}',
+//                   style: TextStyle(
+//                     fontSize: 18,
+//                     color: Colors.white, // Text color set to white
+//                   ),
+//                 ),
+//                 SizedBox(height: 16),
+//                 ElevatedButton(
+//                   onPressed: () {
+//                     Navigator.push(
+//                       context,
+//                       MaterialPageRoute(
+//                         builder: (context) => WishlistPage(wishlistItems: []),
+//                       ),
+//                     ); // Navigate to WishlistPage
+//                   },
+//                   child: Text('My Wishlist'),
+//                 ),
+//                 SizedBox(height: 16),
+//                 ElevatedButton(
+//                   onPressed: () {
+//                     Navigator.push(
+//                       context,
+//                       MaterialPageRoute(
+//                         builder: (context) => EditProfilePage(
+//                           username: _username,
+//                           onUpdate: _updateUsername,
+//                         ),
+//                       ),
+//                     ); // Navigate to EditProfilePage
+//                   },
+//                   child: Text('Edit Profile'),
+//                 ),
+//               ],
+//             )
+//                 : CircularProgressIndicator(), // Show loading indicator while user info is being fetched
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+
+
+
+
+
+
+// import 'package:flutter/material.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+// import 'wishlist_page.dart'; // Import the WishlistPage
+// import 'edit_profile_page.dart'; // Import the EditProfilePage
+//
+// class UserProfilePage extends StatefulWidget {
+//   @override
+//   _UserProfilePageState createState() => _UserProfilePageState();
+// }
+//
+// class _UserProfilePageState extends State<UserProfilePage> {
+//   User? _user; // User object to store current user
+//   late String _username; // Variable to store the username
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//     _getUserInfo(); // Fetch user information when the widget initializes
+//   }
+//
+//   // Method to fetch user information
+//   void _getUserInfo() {
+//     User? user = FirebaseAuth.instance.currentUser;
+//     if (user != null) {
+//       setState(() {
+//         _user = user;
+//         _username = user.displayName ?? ''; // Get the username from user's display name
+//       });
+//     }
+//   }
+//
+//   // Method to update the username
+//   void _updateUsername(String newUsername) {
+//     setState(() {
+//       _username = newUsername;
+//     });
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('User Profile'),
+//       ),
+//       body: Stack(
+//         children: [
+//           Image.asset(
+//             'assets/wave.png', // Adjust path according to your image location
+//             fit: BoxFit.cover,
+//             width: double.infinity,
+//             height: double.infinity,
+//           ),
+//           Center(
+//             child: _user != null
+//                 ? Column(
+//               mainAxisAlignment: MainAxisAlignment.center,
+//               children: [
+//                 Container(
+//                   width: 120,
+//                   height: 120,
+//                   decoration: BoxDecoration(
+//                     shape: BoxShape.circle,
+//                     image: DecorationImage(
+//                       image: AssetImage('assets/croma_final.jpg'), // Placeholder profile image
+//                       fit: BoxFit.cover,
+//                     ),
+//                   ),
+//                 ),
+//                 SizedBox(height: 16),
+//                 Text(
+//                   _username,
+//                   style: TextStyle(
+//                     fontSize: 24,
+//                     fontWeight: FontWeight.bold,
+//                     color: Colors.white, // Text color set to white
+//                   ),
+//                 ),
+//                 SizedBox(height: 16),
+//                 Text(
+//                   'Email: ${_user!.email}',
+//                   style: TextStyle(
+//                     fontSize: 18,
+//                     color: Colors.white, // Text color set to white
+//                   ),
+//                 ),
+//                 SizedBox(height: 8),
+//                 Text(
+//                   'UID: ${_user!.uid}',
+//                   style: TextStyle(
+//                     fontSize: 18,
+//                     color: Colors.white, // Text color set to white
+//                   ),
+//                 ),
+//                 SizedBox(height: 16),
+//                 ElevatedButton(
+//                   onPressed: () {
+//                     Navigator.push(
+//                       context,
+//                       MaterialPageRoute(
+//                         builder: (context) => WishlistPage(wishlistItems: []),
+//                       ),
+//                     ); // Navigate to WishlistPage
+//                   },
+//                   child: Text('My Wishlist'),
+//                 ),
+//                 SizedBox(height: 16),
+//                 ElevatedButton(
+//                   onPressed: () async {
+//                     final updatedUsername = await Navigator.push(
+//                       context,
+//                       MaterialPageRoute(
+//                         builder: (context) => EditProfilePage(
+//                           username: _username,
+//                         ),
+//                       ),
+//                     ); // Navigate to EditProfilePage and wait for result
+//                     if (updatedUsername != null) {
+//                       _updateUsername(updatedUsername); // Update the username if not null
+//                     }
+//                   },
+//                   child: Text('Edit Profile'),
+//                 ),
+//               ],
+//             )
+//                 : CircularProgressIndicator(), // Show loading indicator while user info is being fetched
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+
+
+
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'wishlist_page.dart'; // Import the WishlistPage
@@ -297,6 +838,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
     setState(() {
       _username = newUsername;
     });
+    _user?.updateDisplayName(newUsername); // Update display name in Firebase
   }
 
   @override
@@ -359,20 +901,28 @@ class _UserProfilePageState extends State<UserProfilePage> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => WishlistPage(wishlistItems: [],)), // Navigate to WishlistPage
-                    );
+                      MaterialPageRoute(
+                        builder: (context) => WishlistPage(wishlistItems: []),
+                      ),
+                    ); // Navigate to WishlistPage
                   },
                   child: Text('My Wishlist'),
                 ),
                 SizedBox(height: 16),
                 ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
+                  onPressed: () async {
+                    final updatedUsername = await Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => EditProfilePage(username: _username, onUpdate: _updateUsername),
+                        builder: (context) => EditProfilePage(
+                          username: _username,
+                          onUpdate: _updateUsername,
+                        ),
                       ),
-                    );
+                    ); // Navigate to EditProfilePage and wait for result
+                    if (updatedUsername != null) {
+                      _updateUsername(updatedUsername); // Update username if changed
+                    }
                   },
                   child: Text('Edit Profile'),
                 ),
@@ -385,6 +935,5 @@ class _UserProfilePageState extends State<UserProfilePage> {
     );
   }
 }
-
 
 

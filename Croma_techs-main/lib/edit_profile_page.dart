@@ -57,25 +57,98 @@
 
 
 
+// import 'package:flutter/material.dart';
+//
+// class EditProfilePage extends StatefulWidget {
+//   final String username; // Username parameter
+//   final Function(String) onUpdate; // Callback function to update the username
+//
+//   EditProfilePage({required this.username, required this.onUpdate});
+//
+//   @override
+//   _EditProfilePageState createState() => _EditProfilePageState();
+// }
+//
+// class _EditProfilePageState extends State<EditProfilePage> {
+//   late TextEditingController _usernameController;
+//
+//   @override
+//   void initState() {
+//     super.initState();
+//     _usernameController = TextEditingController(text: widget.username);
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Edit Profile'),
+//       ),
+//       body: Padding(
+//         padding: const EdgeInsets.all(16.0),
+//         child: Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             Text(
+//               'Username',
+//               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+//             ),
+//             TextField(
+//               controller: _usernameController,
+//               decoration: InputDecoration(
+//                 hintText: 'Enter your username',
+//               ),
+//             ),
+//             SizedBox(height: 16),
+//             ElevatedButton(
+//               onPressed: () {
+//                 // Call the onUpdate callback with the updated username
+//                 widget.onUpdate(_usernameController.text);
+//                 Navigator.pop(context); // Pop the edit profile page
+//               },
+//               child: Text('Save'),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+//
+//   @override
+//   void dispose() {
+//     _usernameController.dispose();
+//     super.dispose();
+//   }
+// }
+
+
+
+
 import 'package:flutter/material.dart';
 
 class EditProfilePage extends StatefulWidget {
-  final String username; // Username parameter
-  final Function(String) onUpdate; // Callback function to update the username
+  final String username;
+  final ValueChanged<String>? onUpdate;
 
-  EditProfilePage({required this.username, required this.onUpdate});
+  EditProfilePage({required this.username, this.onUpdate});
 
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
-  late TextEditingController _usernameController;
+  late TextEditingController _controller;
 
   @override
   void initState() {
     super.initState();
-    _usernameController = TextEditingController(text: widget.username);
+    _controller = TextEditingController(text: widget.username);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -87,24 +160,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Username',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-            ),
             TextField(
-              controller: _usernameController,
-              decoration: InputDecoration(
-                hintText: 'Enter your username',
-              ),
+              controller: _controller,
+              decoration: InputDecoration(labelText: 'Username'),
             ),
             SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
-                // Call the onUpdate callback with the updated username
-                widget.onUpdate(_usernameController.text);
-                Navigator.pop(context); // Pop the edit profile page
+                if (widget.onUpdate != null) {
+                  widget.onUpdate!(_controller.text);
+                }
+                Navigator.pop(context, _controller.text); // Pass back the updated username
               },
               child: Text('Save'),
             ),
@@ -113,10 +180,5 @@ class _EditProfilePageState extends State<EditProfilePage> {
       ),
     );
   }
-
-  @override
-  void dispose() {
-    _usernameController.dispose();
-    super.dispose();
-  }
 }
+
