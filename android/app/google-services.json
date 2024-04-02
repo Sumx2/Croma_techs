@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "884936670382",
+    "project_id": "croma-techs",
+    "storage_bucket": "croma-techs.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:884936670382:android:9806fe7b49ea1c7712813f",
+        "android_client_info": {
+          "package_name": "com.example.croma_techs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "884936670382-9j65sgueat3qqmv7sk4mkok70ma6ju0v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.croma_techs",
+            "certificate_hash": "41e791eabec064edd46de9d431aa088f57e90079"
+          }
+        },
+        {
+          "client_id": "884936670382-62u8bipm7i4aqqfqh3cs2d7mup6phrsv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLWlR2Krwzs_u58ePCAXGGdVb6DGQKgpk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "884936670382-62u8bipm7i4aqqfqh3cs2d7mup6phrsv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "884936670382-62c73r638bdqds7tlbf1bgafmfbbkm89.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.cromaTechs.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
